@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    .configuration-container
+        p Wagh! Congrats! It's configuration time!
+        button.salesforce-auth Authorize to Salesforce
+        script.
+            $('.salesforce-auth').click(function() {
+                var date = Date.now();
+                var configName = 'stridecon' + date;
+                var authorizeLink = 'https://designer2.azuqua.com/app/oauth/salesforce2_29/authorize?app_token=azq_apps&orgId=6188&configName=' + configName + '&version=1.3.67&env=login';
+
+                var authWindow = window.open(authorizeLink, 'Authorize to Salesforce', 'resizable,scrollbars,status,width=650,height=400');
+                var pollTimer = window.setInterval(function() {
+                    if (authWindow.closed != false) {
+                        window.clearInterval(pollTimer);
+                        $.get('https://api.azuqua.com/flo/0e9aa8845100cbbe224f368fdae0515b/invoke?clientToken=9ec73c196b0f726b3ecf945a2b2460311f571c11bfe2899523188662887d78e5', function(response) {
+                            console.log('update azuqua table', response);
+                        });
+                        $.get('/app/module/chat/conversation/chat:configuration/salesforce-config/state', function(response) {
+                            console.log('update stride state', response)
+                        })
+                    }
+                }, 200);
+            });
+        
+

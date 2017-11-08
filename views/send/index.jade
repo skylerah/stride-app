@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    .button-container
+        h3 Recently Discussed Opportunities
+        .salesforce-form
+    script.
+        function createButtons(opportunities, cb) {
+            console.log('well this is being hit...');
+                    opportunities.data.forEach(function(oppt) {
+                        var flo = 'https://api.azuqua.com/flo/3f59177509700d2dfaf3528e36576841/invoke?clientToken=5b5610d8413e24dab2d2e8ac6a88d233ff1789d57a00a3e738b752d10fe2200c&salesforceUrl=' + oppt.oppUrl;
+
+                        $('.salesforce-form').append('<p><button url="' + oppt.oppUrl + '" class="ak-button ak-button__appearance-default"></p>' + oppt.oppName + '</button>');
+                    });
+                    cb();
+                }
+
+        $(document).ready(function() {
+            $.get('https://api.azuqua.com/flo/bb2612e2b7056032722ae5b22a626f99/invoke?clientToken=20f9c7201448f8669b7680dbcbc5d7dd04250513be127baa8f42635daa3bff8d', function(opportunities) {
+                createButtons(opportunities, function() {
+                    console.log('buttons', $('button'));
+                    $('button').each(function() {
+                        $(this).click(function() {
+                            var sf = $(this).attr('url');
+                            console.log(sf);
+
+                            $.post('https://api.azuqua.com/flo/3f59177509700d2dfaf3528e36576841/invoke?clientToken=5b5610d8413e24dab2d2e8ac6a88d233ff1789d57a00a3e738b752d10fe2200c', {salesforceUrl: sf});
+
+                            $('.button-container').html('Great! We just sent this note to the appropriate Salesforce opportunity. You may close this dialog window.');
+                        })
+                    })
+                })
+            });
+            //- $('.salesforce-form').submit(function(e) {
+            //-     e.preventDefault();
+            //-     var dealId = $('.deal').val();
+            //-     var message = $('.message').val();
+            //-     $.post('https://api.azuqua.com/flo/3f59177509700d2dfaf3528e36576841/invoke?clientToken=5b5610d8413e24dab2d2e8ac6a88d233ff1789d57a00a3e738b752d10fe2200c', {dealId: dealId});
+            //-     $('.container').html('Great! A note has been added to this Salesforce opportunity. You can close this window now...!');
+            //- });
+        });
+        

@@ -1,0 +1,108 @@
+{
+    "baseUrl": "http://4af1121d.ngrok.io",
+    "key": "salesbot",
+    "modules": {
+        "chat:messageAction": [
+            {
+                "key": "send-salesforce-action",
+                "name": {
+                    "value": "Send to Salesforce"
+                },
+                "target": "send-salesforce"
+            }
+        ],
+        "chat:bot:messages": [
+            {
+                "key": "salesforce-cardify",
+                "pattern": ".*salesforce.com\/([a-zA-Z0-9]{18}|[a-zA-Z0-9]{15}).*",
+                "url": "/getObject"
+            }
+        ],
+        "chat:glance": [
+            {
+                "key": "opportunity-glance",
+                "name": {
+                    "value": "Won/Lost Opportunities"
+                },
+                "icon": {
+                    "url": "/img/icon.png",
+                    "url@2x": "/img/icon2x.png"
+                },
+                "target": "app-sidebar",
+                "queryUrl": "/sidebar-query"
+            }
+        ],
+        "chat:sidebar": [
+            {
+                "key": "app-sidebar",
+                "name": {
+                    "value": "Salesforce by Azuqua"
+                },
+                "url": "/",
+                "authentication": "jwt"
+            }
+        ],
+        "chat:configuration": [
+            {
+                "key": "salesforce-config",
+                "page": {
+                    "target": "app-config"
+                },
+                "state": {
+                    "url": "/state"
+                },
+                "authentication": "jwt"
+            }
+        ],
+        "chat:dialog": [
+            {
+                "key": "send-salesforce",
+                "title": {
+                    "value": "Send to Salesforce"
+                },
+                "options": {
+                    "size": {
+                        "width": "500px",
+                        "height": "300px"
+                    }
+                },
+                "primaryAction": {
+                    "key": "action-close",
+                    "name": {
+                        "value": "Close"
+                    }
+                },
+                "url": "/send-salesforce",
+                "authentication": "jwt"
+            },
+            {
+                "key": "app-config",
+                "title": {
+                    "value": "Authentication"
+                },
+                "options": {
+                    "size": {
+                        "width": "500px",
+                        "height": "300px"
+                    }
+                },
+                "primaryAction": {
+                    "key": "action-save",
+                    "name": {
+                        "value": "Save"
+                    }
+                },
+                "secondaryActions": [
+                    {
+                        "key": "action-close",
+                        "name": {
+                            "value": "Close"
+                        }
+                    }
+                ],
+                "url": "/config",
+                "authentication": "jwt"
+            }
+        ]
+    }
+}
