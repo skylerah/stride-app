@@ -57,7 +57,7 @@ export default class Opportunity extends PureComponent {
         return (
             <div className="opportunity">
                 <ul className="closed-details">
-                    {<li className="profile-picture"><Avatar name={this.props.ownerName} size="small" src={this.state.profilePicture} /></li>}
+                    {<li className="profile-picture"><Avatar name={this.props.ownerName} size="small" src={this.props.profilePicture} /></li>}
                     <li className="opportunity-name">{this.props.name}</li>
                 </ul>
                 <ul className="amount-details">

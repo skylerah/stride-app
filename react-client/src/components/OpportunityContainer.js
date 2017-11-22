@@ -39,6 +39,7 @@ export default class OpportunityContainer extends PureComponent {
                         var link = baseUrl + '/' + id;
                         var stageName = oppt.StageName;
                         var opptStatus = '';
+                        var profilePictureUrl = oppt.imageUrl;
 
                         if (stageName === 'Closed Won') {
                             opptStatus = 'success';
@@ -57,6 +58,7 @@ export default class OpportunityContainer extends PureComponent {
                             stageName={stageName}
                             opptStatus={opptStatus}
                             key={id}
+                            profilePicture={profilePictureUrl}
                         />
                     });
                     this.setState({ oppts: oppts });

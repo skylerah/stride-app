@@ -17,7 +17,7 @@ export default class SalesforceContainer extends PureComponent {
     }
 
     componentDidMount() {
-        // this.registerEventListener();
+        this.registerEventListener();
     }
 
     registerEventListener = () => {
@@ -84,44 +84,39 @@ export default class SalesforceContainer extends PureComponent {
 
         var oppts = [
             {
-                oppUrl: 'url',
-                oppName: 'Opp Name #1',
-                amount: '3000',
-                oppStatus: 'Won',
-                ownerName: 'Skyler Hartle'
+                url: 'url',
+                name: 'Opp Name #1',
+                lastDiscussDateTime: ''
             },
             {
-                oppUrl: 'url',
-                oppName: 'Opp Name #1',
-                amount: '3000',
-                oppStatus: 'Won',
-                ownerName: 'Skyler Hartle'
+                url: 'url',
+                name: 'Opp Name #2',
+                lastDiscussDateTime: ''
             },
             {
-                oppUrl: 'url',
-                oppName: 'Opp Name #1',
-                amount: '3000',
-                oppStatus: 'Won',
-                ownerName: 'Skyler Hartle'
+                url: 'url',
+                name: 'Opp Name #3',
+                lastDiscussDateTime: ''
             },
             {
-                oppUrl: 'url',
-                oppName: 'Opp Name #1',
-                amount: '3000',
-                oppStatus: 'Won',
-                ownerName: 'Skyler Hartle'
+                url: 'url',
+                name: 'Opp Name #4',
+                lastDiscussDateTime: ''
             },
             {
-                oppUrl: 'url',
-                oppName: 'Opp Name #1',
-                amount: '3000',
-                oppStatus: 'Won',
-                ownerName: 'Skyler Hartle'
+                url: 'url',
+                name: 'Opp Name #5',
+                lastDiscussDateTime: ''
+            },
+            {
+                url: 'url',
+                name: 'Opp Name #6',
+                lastDiscussDateTime: ''
             }
         ]
 
         var opportunities = oppts.map((oppt) => {
-            return <Button inline={false} onClick={() => this.sendMessage(oppt.oppUrl)} shouldFitContainer>{oppt.oppName}</Button>
+            return <Button onClick={() => this.sendMessage(oppt.url)} shouldFitContainer>{oppt.name}</Button>
         });
         this.setState({ opportunities: opportunities });
     }
@@ -131,7 +126,7 @@ export default class SalesforceContainer extends PureComponent {
 
         let view = null;
         if (this.state.view === null) {
-            view = <ButtonGroup>{this.state.opportunities}</ButtonGroup>
+            view = this.state.opportunities;
         }
         if (this.state.view === 'sending') {
             view = <div>Currently sending message...</div>;
@@ -144,7 +139,10 @@ export default class SalesforceContainer extends PureComponent {
         }
 
         return (
-            <div className="send-to-salesforce">
+            <div className="send-container">
+            <p>
+                <h3>Select an opportunity</h3>
+            </p>
                 {view}
             </div>            
         )
