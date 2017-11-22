@@ -1,0 +1,28 @@
+{
+  "name": "example-stride-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@atlaskit/avatar": "^8.0.11",
+    "@atlaskit/badge": "^6.1.2",
+    "@atlaskit/button": "^5.4.8",
+    "@atlaskit/icon": "^10.1.2",
+    "@atlaskit/lozenge": "^3.4.4",
+    "@atlaskit/media-card": "^21.5.0",
+    "@atlaskit/page": "^5.0.3",
+    "@atlaskit/reduced-ui-pack": "^8.1.0",
+    "@atlaskit/tabs": "^4.0.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.14",
+    "simple-xdm": "^1.0.6",
+    "superagent": "^3.8.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

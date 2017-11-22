@@ -1,0 +1,122 @@
+.app {
+  width: 240px;
+}
+
+.amount-details {
+  padding: 5px;
+}
+
+.amount-details li {
+  display: inline;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.discuss-list {
+  padding: 5px;
+}
+
+.discuss-list li {
+  display: inline;
+  padding-right: 5px;
+}
+
+.closed-details {
+  padding: 5px;
+  padding-bottom: 0px;
+}
+
+.closed-details li {
+  display: inline;
+  padding-right: 10px;
+}
+
+.opportunity {
+  color: #172B4D;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  background-color: #F4F5F7;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.2), 0 0 1px 0 rgba(9, 30, 66, 0.24);
+  text-align: center;
+  font-size: 12px;
+  padding-bottom: 1px;
+  
+}
+
+.opportunity-name {
+  font-size: 14px;
+  color: #091E42;
+  font-weight: 500;
+  
+}
+
+.opportunity ul {
+  list-style-type: none;
+}
+
+.oppt-closed-won {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #006644;
+  background-color: #E3FCEF;
+  max-width: 200px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: inline-flex;
+  padding: 2px 4px 3px 4px;
+}
+
+.oppt-closed-lost {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #BF2600;
+  background-color: #FFEBE6;
+  max-width: 200px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: inline-flex;
+  padding: 2px 4px 3px 4px;
+}
+
+.status-list {
+  padding: 5px;
+}
+
+.status-list li {
+  margin-bottom: 15px;
+}
+
+.opportunity-name {
+  padding-top: 5px;
+}
+
+.discuss-button {
+  color: #333333;
+  font-weight: normal;
+}
+
+.configuration-page {
+  text-align: center;
+  width: 400px;
+  height: 200px;
+  padding: 25px;
+}
+
+.intro-text {
+  padding-bottom: 30px;
+}
+
+.image-container img {
+  height: 150px;
+}
+
+.send-to-salesforce {
+}
+
+.send-to-salesforce button {
+}

@@ -1,5 +1,5 @@
 {
-    "baseUrl": "http://4af1121d.ngrok.io",
+    "baseUrl": "https://88f33d62.ngrok.io",
     "key": "salesbot",
     "modules": {
         "chat:messageAction": [
@@ -49,7 +49,7 @@
                     "target": "app-config"
                 },
                 "state": {
-                    "url": "/state"
+                    "url": "/v2/flo/60243fa2af9dac1221dc637c30946e81/invoke?clientToken=77620b0c9c31003c728f3afac03a8923501a3ddd78f59f66af4f726fc0d64ce5"
                 },
                 "authentication": "jwt"
             }

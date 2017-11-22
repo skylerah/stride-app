@@ -4,11 +4,11 @@ var fs = require('fs');
 var jwtUtil = require('jwt-simple');
 var request = require('request');
 var rp = require('request-promise');
+var path = require('path');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //serves up the index of the site w/ the bundle js
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 //proxy routes, needs to decode the appropriate JWTs
@@ -38,17 +38,22 @@ router.get('/sidebar-query', function(req, res, next) {
 
 //passes the descriptor to the request
 router.get('/descriptor', function(req, res, next) {
-  fs.readFile('../descriptor.json', function(err, data) {
-    console.log(data, typeof data);
-    var parsedDescriptor = JSON.parse(data);
-    res.json(parsedDescriptor);
+  console.log('going here');
+  fs.readFile('./descriptor.json', function(err, data) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('descriptor', data, typeof data);
+      var parsedDescriptor = JSON.parse(data);
+      res.json(parsedDescriptor);
+    }
   });
 
 });
 
 router.get('/config', function(req, res, next) {
-  res.set({ 'Access-Control-Allow-Origin': '*' });
-  res.render('config/index', { title: 'Express' });
+  // res.set({ 'Access-Control-Allow-Origin': '*' });
+  res.render('index');
 });
 
 router.get('/state', function(req, res, next) {
@@ -121,50 +126,8 @@ router.post('/getUser', validateJWT, function(req, res, next) {
   });
 });
 
-router.get('/updateState', validateJWT, function(req, res, next) {
-  console.log('yah');
-
-  // var options = { method: 'POST', uri: 'https://auth.atlassian.com/oauth/token', body:
-  //   {
-  //     grant_type: 'client_credentials',
-  //     client_id: 'jpxosPzwQ63P1A2jdJ8YcNK2CpxGiklb',
-  //     client_secret: 'faT7PWTGA_U5wwWQYHnJ2-eAggB2VbFwJMzA6FZSuPP4adW_WcGxDvbvlhCeZhyP',
-  //     audience: 'api.atlassian.com'
-  //   },
-  //   json: true
-  // };
-
-  // rp(options).then(function(body) {
-  //     var token = body.access_token;
-  //     var data = {
-  //       configured: true
-  //     }
-  //     var headers = {
-  //       Authorization: 'Bearer ' + token
-  //     }
-  //     var stateConfigOptions = {
-  //       method: 'POST',
-  //       uri: 'https://api.atlassian.com/app/module/chat/conversation/chat:configuration/salesforce-config/state',
-  //       body: data,
-  //       headers: headers,
-  //       json: true
-  //     }
-  //     console.log(stateConfigOptions)
-  //     rp(stateConfigOptions).then(function(body) {
-  //       console.log(body);
-  //     })
-  //   }).catch(function (e) {
-  //     console.error(e);
-  //   })
-
-  res.sendStatus(200);
-
-
-
-});
-
 router.get('/send-salesforce', function(req, res, next) {
-  res.render('send/index');
+  res.render('index');
 });
 
 function getJWT(req) {
