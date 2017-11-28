@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import AP from 'simple-xdm/dist/iframe';
 import Btn from '@atlaskit/button';
 
-export default class Opportunity extends PureComponent {
+export default class DiscussButton extends PureComponent {
     
     insertMessage = () => {
         var message = 'Let\'s discuss this: ' + this.props.link;
@@ -39,11 +39,21 @@ export default class Opportunity extends PureComponent {
                     body: JSON.stringify(body)
                 };
 
-                fetch('https://api.azuqua.com/flo/6575ef19f9834040a0a28a529bf97cc5/invoke?clientToken=4dd8307a8e296d9173f27b34a8ad380dfd821625425d93002930414b7686487c', options)
-                    .then((res) => res.json()
-                        .then((data) => {
-                            console.log('invoked');
-                        }));
+                studio.invokeFlo(41364, {userId: user.id, opportunityUrl: link}, function(err, data) { // eslint-disable-line
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        console.log('invoked');
+                    }
+
+                });
+
+                //FLO ID: 41364
+                // fetch('https://api.azuqua.com/flo/6575ef19f9834040a0a28a529bf97cc5/invoke?clientToken=4dd8307a8e296d9173f27b34a8ad380dfd821625425d93002930414b7686487c', options)
+                //     .then((res) => res.json()
+                //         .then((data) => {
+                //             console.log('invoked');
+                //         }));
             });
     }
 
