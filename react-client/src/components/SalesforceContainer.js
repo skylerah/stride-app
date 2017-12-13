@@ -38,28 +38,17 @@ export default class SalesforceContainer extends PureComponent {
                 var string = '';
                 var parentNodeArray = message.context.message.body.content;
 
-                console.log(parentNodeArray);
-    
-                parentNodeArray.forEach((childNode) => {
-                    if (childNode.type === 'paragraph') {
-                        var contentNode = childNode.content;
-                        contentNode.forEach((content) => {
-                            if (content.type === 'text') {
-                                string += content.text;
-                            }
-                            if (content.type === 'mention') {
-                                string += content.attrs.text;
-                            }
-                        });
-                    }
-                });
-                console.log(string);
-                if (string.length > 0) {
-                    this.setState({ message: string });
-                } else {
-                    this.setState({view: 'invalid'})
-                }
-                
+                var options = {
+                    method: 'POST',
+                    body: JSON.stringify(message.context.message.body)
+                };
+
+                fetch('https://api.azuqua.com/flo/fb8197e708ea94881e9adc7c0f819c40/invoke', options)
+                    .then((res) => res.json()
+                    .then((object) => {
+                        console.log('invoked', object);
+                        this.setState({message: object.body});
+                    }));
             }
         });
     }    
@@ -72,7 +61,9 @@ export default class SalesforceContainer extends PureComponent {
         };
         
         // FLOpages implementation
-        studio.invokeFlo(41310, {salesforceUrl: url, message: this.state.message}, function(err, data) { // eslint-disable-line
+
+        var jwt = this.getQueryParam('jwt');
+        studio.invokeFlo(41310, {salesforceUrl: url, message: this.state.message, jwt: jwt}, (err, data) => { // eslint-disable-line
             if (err) {
                 console.error(err);
             } else {
@@ -91,11 +82,15 @@ export default class SalesforceContainer extends PureComponent {
     generateRecentOpportunities = () => {
         var jwt = this.getQueryParam('jwt');
         // FLOpages implementation, comment this out, FLOID 41367
-        studio.invokeFlo(41367, { jwt: jwt }, function (err, oppt) { // eslint-disable-line
-            var opportunities = oppt.data.map((oppt) => {
-                return <Button onClick={() => this.sendMessage(oppt.oppUrl)}>{oppt.oppName}</Button>
-            });
-            this.setState({ opportunities: opportunities });
+        studio.invokeFlo(41367, { jwt: jwt }, (err, oppt) => { // eslint-disable-line
+            if (err) {
+                console.error(err);
+            } else {
+                var opportunities = oppt.data.map((oppt) => {
+                    return <Button onClick={() => this.sendMessage(oppt.url)} shouldFitContainer>{oppt.name}</Button>
+                });
+                this.setState({ opportunities: opportunities });
+            }
         });
 
 
@@ -130,9 +125,6 @@ export default class SalesforceContainer extends PureComponent {
 
         return (
             <div className="send-container">
-            <p>
-                <h3>Select an opportunity</h3>
-            </p>
                 {view}
             </div>            
         )

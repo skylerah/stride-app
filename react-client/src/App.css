@@ -1,6 +1,14 @@
-.app {
-  width: 240px;
+/* #main {
+  width: 240px !important;
+  padding: 0px !important;
 }
+
+
+.wrapper {
+  width: 240px !important;
+} */
+
+.router {}
 
 .amount-details {
   padding: 5px;
@@ -26,10 +34,10 @@
   padding-bottom: 0px;
 }
 
-.closed-details li {
+/* .closed-details li {
   display: inline;
   padding-right: 10px;
-}
+} */
 
 .opportunity {
   color: #172B4D;
@@ -116,13 +124,18 @@
 }
 
 .send-container {
-  width: 400px;
+  /* width: 400px;
   height: 200px;
   padding: 25px;
   padding-top: 0px;
-  text-align: center;
+  text-align: center; */
 }
 
 .send-container button {
   margin-bottom: 5px;
+}
+
+.oportunity-container {
+  width: 240px;
+  padding-right: 25px;
 }

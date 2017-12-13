@@ -28,16 +28,22 @@ export default class OpportunityContainer extends PureComponent {
         var jwt = this.getQueryParam('jwt');
         console.log('window', window.location.href);
         console.log('jwt', jwt);
-        studio.invokeFlo(41365, {jwt: jwt}, function (err, data) { // eslint-disable-line
+
+        studio.invokeFlo(41365, {jwt: jwt}, (err, data) => { // eslint-disable-line
             if (err) {
                 console.error(err);
             } else {
 
+                console.log('raw data from flo', data, typeof data);
+
                 var parsed = data;
                 // var parsed = JSON.parse(data);
                 var baseUrl = parsed.salesforceBaseUrl;
-                
-                var oppts = parsed.data.map(function (oppt) {
+
+                var oppts = parsed.data.map((stringOppt) => {
+                    var oppt = JSON.parse(stringOppt);
+                    console.log(oppt);
+
                     var accountName = '';
                     var id = oppt.Id;
                     var name = oppt.Name;
@@ -55,7 +61,7 @@ export default class OpportunityContainer extends PureComponent {
                     var link = baseUrl + '/' + id;
                     var stageName = oppt.StageName;
                     var opptStatus = '';
-                    var profilePictureUrl = oppt.imageUrl;
+                    var profilePictureUrl = oppt.Owner.imageUrl;
 
                     if (stageName === 'Closed Won') {
                         opptStatus = 'success';
@@ -136,7 +142,7 @@ export default class OpportunityContainer extends PureComponent {
 
     render() {
         return (
-            <div className="app">
+            <div className="opportunity-container">
                 {this.state.oppts}
             </div>
         );

@@ -14,7 +14,7 @@ export default class AuthConfiguration extends PureComponent {
     componentDidMount = () => {
         var jwt = this.getQueryParam('jwt');
         var link = 'https://6188.pg.azu.qa:443/setup?jwt=' + jwt;
-        this.setState( {setupLink: link});
+        this.setState( {setupLink: link} );
     }
 
     closeDialog = () => {
